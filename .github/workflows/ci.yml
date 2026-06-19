@@ -27,7 +27,7 @@ jobs:
     name: "① 验证 & 测试"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/setup-python@v5
         with:
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: 构建 Docker 镜像
         run: docker build -t simple-web:latest .
@@ -60,7 +60,7 @@ jobs:
         run: gzip -f /tmp/simple-web.tar
 
       - name: 上传镜像 artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: docker-image
           path: /tmp/simple-web.tar.gz
@@ -77,7 +77,7 @@ jobs:
     environment:
       name: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: 下载镜像 artifact（放到工作区）
         uses: actions/download-artifact@v4
